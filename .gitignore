@@ -1,1 +1,6 @@
-reference.py/
+reference.py
+requirements.txt
+.flaskenv
+venv/
+parse_copy.py
+__pycache__/

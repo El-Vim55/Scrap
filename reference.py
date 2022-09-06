@@ -10,8 +10,8 @@ headers = ({'User-Agent':
 
 
 # url = 'https://core-electronics.com.au/raspberry-pi-compute-module-4-lite-1gb-ram.html'
-url = 'https://core-electronics.com.au/raspberry-pi-compute-module-4-lite-2gb-ram-wireless.html' 
-# url = 'https://core-electronics.com.au/raspberry-pi-compute-module-4-32gb-emmc-4gb-ram-wireless.html'
+# url = 'https://core-electronics.com.au/raspberry-pi-compute-module-4-lite-2gb-ram-wireless.html' 
+url = 'https://core-electronics.com.au/raspberry-pi-compute-module-4-8gb-emmc-2gb-ram.html'
 
 r = requests.get(url, headers=headers)
 print('[Response Code]', r.status_code)
@@ -36,6 +36,7 @@ def stock() -> str:
 
     for stock in soup.find_all(
                         'div', attrs={'class': 'product alert stock'}):
+        # print(stock)
         stock_1 = ''.join(stock.find('p'))
         return f"[Stock] {stock_1}"
 
