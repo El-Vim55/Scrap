@@ -13,7 +13,7 @@ headers = (
                         'Accept-language': 'en-AU, en;q=0.5'}
                         )
 
-#? The frontend for the site keeps changing, perhaps theres a way to use different urls?
+""" The frontend for the site keeps changing, perhaps theres a way to use different urls? """
 BASE_URL = 'https://core-electronics.com.au/raspberry-pi/boards/compute-module-4/wireless.html?aw_shopbybrand_brand=359&cat=1396%2C1397%2C1398&price=30.00-100.00'
 # BASE_URL = 'https://core-electronics.com.au/catalogsearch/result/?q=raspberry+pi+compute+module+4'
 
@@ -40,9 +40,9 @@ def Title() -> list:
     res = []
 
     for links in dataset[1:]:
-        soup1 = BeautifulSoup(req(links).content, 'lxml')
+        soup = BeautifulSoup(req(links).content, 'lxml')
 
-        for title in soup1.find_all('h1', attrs={'class': 'page-title'}):
+        for title in soup.find_all('h1', attrs={'class': 'page-title'}):
             title = title.get_text(strip=True)
             res.append(title)
     return res
@@ -56,12 +56,12 @@ def Stock() -> list:
 
         for stock in soup.find_all(
                             'div', attrs={'class': 'product alert stock'}):
-            notInStock = ''.join(stock.find('p'))
+            notInStock = ''.join(stock.find('p')).replace('Out of Stock', 'No')
             res.append(notInStock)
 
         for stock in soup.find_all(
                             'p', attrs={'class': 'single-product-ship-note'}):
-            inStock = stock.get_text(strip=True)[:8]
+            inStock = stock.get_text(strip=True)[:8].replace('In stock', 'Yes')
             res.append(inStock)
     return list(filter(None, res))
 
