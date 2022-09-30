@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The Australian rpilocator dollar store">
+    <title>First App!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">                             <!--bulma cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">            <!--boostrap icons-->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">        <!--dataTables css-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>                                <!--dataTables jquery-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>          <!--dataTables js-->
+
+    <!-- <script type="text/javascript">
+      $(document).ready(function () {
+        $('#data-tables').DataTable({
+            order: [[3, 'desc']],
+        });
+    });
+    </script> -->
+
+  </head>
+  <body>
+  <section class="hero is-small is-primary is-bold">
+      <div class="hero-body">
+        <p class="title">
+          Rpilocator - cheap Australian edition
+        </p>
+  </section>
+  <div class="notification is-link is-light" role="alert">
+    This site is a work in progress. &nbsp;&nbsp;Please give me your ideas for this project: <a href="https://github.com/El-Vim55/Scrap">https://github.com/El-Vim55/Scrap</a>
+  </div>
+
+  <table id="data-tables" class="table" style="border:none;">
+    <thead>
+      <tr class="headers">
+        <th>SKU</th>
+        <th>Title</th>
+        <th>Link</th>
+        <th>Vendor</th>
+        <th>In Stock</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <tbody id="data">
+    <style>
+      div {
+        padding: 18px;
+        margin: 18px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+      }
+
+      th, td {
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:not(.headers):not(.in__stock):hover {background-color: #d1e7dd;}
+
+      .in__stock {background-color: #9fc9b6;}
+    </style>
+      
+      {% for items in job.work0 %}
+      <tr class="{{ 'in__stock' if items[1] == 'Yes' }}">
+        <th>CM4001000</th>
+      </tr>
+      {% endfor %}
+      <tr>
+        <th>TBC</th>
+      </tr>
+    </tbody>
+  </table>
+  </body>
+</html>

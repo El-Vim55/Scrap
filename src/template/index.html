@@ -7,11 +7,19 @@
     <title>First App!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">                             <!--bulma cdn-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">            <!--boostrap icons-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">        <!--dataTables css-->
 
-    <script rel="stylesheet" type="text/javascript" href="https://code.jquery.com/jquery-3.5.1.js"></script>                         <!--dataTables jquery-->
-    <script rel="stylesheet" type="text/javascript" href="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>   <!--dataTables bulma js-->
-       
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">        <!--dataTables css-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>                                <!--dataTables jquery-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>          <!--dataTables js-->
+
+    <!-- <script type="text/javascript">
+      $(document).ready(function () {
+        $('#data-tables').DataTable({
+            order: [[3, 'desc']],
+        });
+    });
+    </script> -->
+
   </head>
   <body>
   <section class="hero is-small is-primary is-bold">
@@ -21,7 +29,7 @@
         </p>
   </section>
   <div class="notification is-link is-light" role="alert">
-    This site is a work in progress. &nbsp;&nbsp;Please give me your ideas for this project: <a href="https://github.com/El-Vim55/Scrap">https://github.com/El-Vim55/Scrap</a>
+    This site is a work in progress. &nbsp;&nbsp;Currently, the source code is very repetetive. &nbsp;&nbsp;Please give me your ideas for this project: <a href="https://github.com/El-Vim55/Scrap">https://github.com/El-Vim55/Scrap</a>
   </div>
 
   <table id="data-tables" class="table" style="border:none;">
@@ -31,7 +39,7 @@
         <th>Title</th>
         <th>Link</th>
         <th>Vendor</th>
-        <th>Stock</th>
+        <th>In Stock</th>
         <th>Price</th>
       </tr>
     </thead>
@@ -60,6 +68,7 @@
 
       .in__stock {background-color: #9fc9b6;}
     </style>
+
       <tr class="{{ 'in__stock' if job.stock[0] == 'Yes' }}">
         <th>CM4001000</th>
         <td>{{ job.title[0] }}</td>
@@ -108,8 +117,38 @@
         <td>{{ job.stock[5] }}</td>
         <td>(AUD) {{ job.price[5] }}</td>
       </tr>
-      <tr>
-        <th>TBC</th>
+
+      <tr class="{{ 'in__stock' if job.stock1[0] == 'Yes' }}">
+        <th>RPI4-MODBP-1GB</th>
+        <td>{{ job.title1[0] }}</td>
+        <td><a href="{{ job.links1[0] }}"><i class="bi bi-bag"></i></a></td> 
+        <td>Core Electronics</td>
+        <td>{{ job.stock1[0] }}</td> 
+        <td>(AUD) {{ job.price1[0] }}</td>
+      </tr>
+      <tr class="{{ 'in__stock' if job.stock1[1] == 'Yes' }}">
+        <th>RPI4-MODBP-2GB</th>
+        <td>{{ job.title1[1] }}</td>
+        <td><a href="{{ job.links1[1] }}"><i class="bi bi-bag"></i></a></td>
+        <td>Core Electronics</td>
+        <td>{{ job.stock1[1] }}</td>
+        <td>(AUD) {{ job.price1[1] }}</td>
+      </tr>
+      <tr class="{{ 'in__stock' if job.stock1[2] == 'Yes' }}">
+        <th>RPI4-MODBP-4GB</th>
+        <td>{{ job.title1[2] }}</td>
+        <td><a href="{{ job.links1[2] }}"><i class="bi bi-bag"></i></a></td> 
+        <td>Core Electronics</td>
+        <td>{{ job.stock1[2] }}</td>
+        <td>(AUD) {{ job.price1[2] }}</td>
+      </tr>
+      <tr class="{{ 'in__stock' if job.stock1[3] == 'Yes' }}">
+        <th>RPI4-MODBP-8GB</th>
+        <td>{{ job.title1[3] }}</td>
+        <td><a href="{{ job.links1[3] }}"><i class="bi bi-bag"></i></a></td>
+        <td>Core Electronics</td>
+        <td>{{ job.stock1[3] }}</td>
+        <td>(AUD) {{ job.price1[3] }}</td>
       </tr>
     </tbody>
   </table>

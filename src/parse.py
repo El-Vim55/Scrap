@@ -13,33 +13,34 @@ headers = (
                         'Accept-language': 'en-AU, en;q=0.5'}
                         )
 
-""" The frontend for the site keeps changing, perhaps theres a way to use different urls? """
-BASE_URL = 'https://core-electronics.com.au/raspberry-pi/boards/compute-module-4/wireless.html?aw_shopbybrand_brand=359&cat=1396%2C1397%2C1398&price=30.00-100.00'
-# BASE_URL = 'https://core-electronics.com.au/catalogsearch/result/?q=raspberry+pi+compute+module+4'
+class Urls():
+    CORE_ELEC_CM4_URL = 'https://core-electronics.com.au/raspberry-pi/boards/compute-module-4/wireless.html?aw_shopbybrand_brand=359&cat=1397%2C1398&price=30.00-100.00'
+    CORE_ELEC_RPI4_URL = 'https://core-electronics.com.au/catalogsearch/result/?q=RPi+4+model+B'
 
 def req(url) -> requests.models.Response or str:
     r = requests.get(url, headers=headers)
 
-    if r.status_code == 200:
-        return r
-    else:
+    if r.status_code != 200:
         print(f"The Status code is: {r.status_code}")
         exit()
+    else:
+        return r
 
-res = []
-soup = BeautifulSoup(req(BASE_URL).content, 'lxml')
+def many_soup(url, pattern) -> list:
+    res = []
+    soup = BeautifulSoup(req(url).content, 'lxml')
 
-for data in soup.find_all('a', 'product-item-link'):
-    res.append(data['href'])
-    pattrn = compile('compute-module-4')
-    dataset = list(filter(lambda x: search(pattrn, x) != None, res))
-    dataset = dataset[::-1]
+    for data in soup.find_all('a', 'product-item-link'):
+        res.append(data['href'])
+        pattrn = compile(f'{pattern}')
+        dataset = list(filter(lambda x: search(pattrn, x) != None, res))
+    return dataset
 
 # Title
-def Title() -> list:
+def Title(args) -> list:
     res = []
 
-    for links in dataset[1:]:
+    for links in args:
         soup = BeautifulSoup(req(links).content, 'lxml')
 
         for title in soup.find_all('h1', attrs={'class': 'page-title'}):
@@ -48,10 +49,10 @@ def Title() -> list:
     return res
 
 # Stock
-def Stock() -> list:
+def Stock(args) -> list:
     res = []
 
-    for links in dataset[1:]:
+    for links in args:
         soup = BeautifulSoup(req(links).content, 'lxml')
 
         for stock in soup.find_all(
@@ -66,10 +67,10 @@ def Stock() -> list:
     return list(filter(None, res))
 
 # Price
-def Price() -> list:
+def Price(args) -> list:
     res = []
 
-    for links in dataset[1:]:
+    for links in args:
         soup = BeautifulSoup(req(links).content, 'lxml')
 
         for data in soup.find_all('span', attrs={'class': 'price'}):
@@ -78,9 +79,9 @@ def Price() -> list:
     return res
 
 # Links
-def Links() -> list:
+def Links(args) -> list:
     res = []
     
-    for links in dataset[1:]:
+    for links in args:
         res.append(links)
     return res
